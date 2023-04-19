@@ -1,0 +1,29 @@
+<nav class="navbar navbar-expand-sm navbar-light bg-light mb-5">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="/">
+        <h1>ToDo List</h1>
+      </a>
+
+      <div>
+        <ul class="navbar-nav">
+            <li><a class="nav-item nav-link" routerLink="/signUp" routerLinkActive>Sign Up</a></li>
+            <li><a class="nav-item nav-link" routerLink="/login" routerLinkActive>Login</a></li>
+          </ul>
+      </div>
+    </div>
+</nav>
+<div class="container">
+    <router-outlet></router-outlet>
+</div>
+
+<ng-template #demoModal let-modal>
+    <div class="modal-header">
+        <h3>Add ToDo</h3>
+    </div>
+    <div class="modal-body">
+      <input placeholder="write here ...">
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-dark" (click)="modal.close('Add click')">Add</button>
+    </div>
+  </ng-template>
