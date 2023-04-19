@@ -1,0 +1,42 @@
+<div class="card m-auto p-auto" style="width: 60%;">
+ 
+    <form class="card-body" [formGroup]="loginInForm" *ngIf="!(auth.user | async)?.id" (ngSubmit)="loginIn()">
+   
+     <div class="mb-3">
+       <label class="form-label fw-bold" for="email">Email:</label>
+       <input class="form-control" id="email" type="email" formControlName="email">
+         <div class="form-text" *ngIf="email?.touched && email?.invalid" >
+          <small *ngIf="email?.errors?.['required']">
+            Write email
+          </small>
+          <small *ngIf="email?.errors?.['email']">
+            Email not correct
+          </small>
+          <small *ngIf="email?.errors?.['pattern']">
+            Email can't include a #}]$%
+          </small>
+         </div>
+     </div>
+   
+     <div class="mb-3">
+       <label class="form-label fw-bold" for="password">password:</label>
+       <input class="form-control" id="password" type="password" formControlName="password" required>
+       <div class="form-text" *ngIf="password?.invalid && password?.touched" >
+         <small >Password must be between 6 and 24 chars</small>
+       </div>
+   
+       <div class="form-text" *ngIf="loginInForm.valid">Form looks good! Let's do this.</div>
+     </div>
+   
+   
+     <button
+       class="btn btn-block btn-primary"
+       type="submit"
+       [disabled]="!loginInForm.valid"
+     >Submit</button>
+   
+   </form>
+   
+
+   </div>
+   
