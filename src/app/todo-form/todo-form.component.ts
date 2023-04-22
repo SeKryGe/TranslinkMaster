@@ -15,7 +15,9 @@ export class TodoFormComponent {
   
 
   onSubmit(){
-    this.todoService.addTodo(this.todo);
+    if(this.todo != '') {
+      this.todoService.addTodo(this.todo);
+    }
     this.todo = '';
   }
 }
