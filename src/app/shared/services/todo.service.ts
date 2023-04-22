@@ -36,7 +36,7 @@ export class ToDoService {
     // this.deletePopup.success(`Todo ${item.id} Deleted!`);
   }
 
-  addTodo(title: string) {
+  addTodo(title: any) {
     let id = this.todoList.length + 2;
 
     const item: Todo = {

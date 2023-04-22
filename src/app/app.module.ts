@@ -12,7 +12,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { SignUpPageComponent } from './registration/sign-up-page/sign-up-page.component';
 import { LoginPageComponent } from './registration/login-page/login-page.component';
 import { TodoComponent } from './shared/components/todo/todo.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TodoFormComponent } from './todo-form/todo-form.component';
 
 @NgModule({
@@ -31,6 +31,7 @@ import { TodoFormComponent } from './todo-form/todo-form.component';
     AppRoutingModule,
     ReactiveFormsModule,
     NgbModule,
+    FormsModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot()    
   ],

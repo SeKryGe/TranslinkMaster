@@ -8,7 +8,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 })
 export class MainLayotComponent {
 
-  constructor(private modalService: NgbModal) {
+  constructor() {
   } 
 
 }
