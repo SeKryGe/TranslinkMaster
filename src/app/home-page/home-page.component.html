@@ -1,0 +1,22 @@
+<div class="card">
+    <div class="card-header text-center">
+        <h4>My ToDo List</h4>
+    </div>
+
+    <div class="card-body">
+        <app-todo-form></app-todo-form>
+    </div>
+    
+    <div class="card-body" >
+        <app-todo 
+        class="card-title" 
+        *ngFor="let todo of todoList|async" 
+        [todo]="todo">
+        </app-todo>
+    </div>   
+
+</div>
+
+            
+
+

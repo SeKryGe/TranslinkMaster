@@ -1,0 +1,66 @@
+<div class="card m-auto p-auto" style="width: 60%;">
+    <form class="card-body" [formGroup]="signupForm" *ngIf="!(auth.user | async)?.id" (ngSubmit)="signUp()">
+        
+        <div class="mb-3" 
+        [ngClass]="{invalid: firstName?.touched && firstName?.invalid}">
+            <label class="form-label fw-bold" for="firstName">First name:</label>
+            <input class="form-control" id="firstName" type="firstName" formControlName="firstName" required>
+            <div class="form-text" *ngIf="firstName?.invalid && firstName?.touched">
+                <small  *ngIf="firstName?.errors?.['required']">
+                    Write First Name...
+                </small>
+            </div>
+            </div>
+
+            <div class="mb-3"
+            [ngClass]="{invalid: lastName?.touched && lastName?.invalid}">
+            <label class="form-label fw-bold" for="lastName">Last name:</label>
+            <input class="form-control" id="lastName" type="lastName" formControlName="lastName" required>
+            <div class="form-text" *ngIf="lastName?.invalid && lastName?.touched">
+                <small  *ngIf="lastName?.errors?.['required']">
+                    Write Last Name...
+                </small>
+            </div>
+        </div>
+
+        <div class="mb-3"
+        [ngClass]="{invalid: email?.touched && email?.invalid}" >
+            <label class="form-label fw-bold" for="email">Email:</label>
+            <input class="form-control" id="email" type="email" formControlName="email" >
+            <div class="form-text"  *ngIf="email?.invalid && (email?.dirty || email?.touched)">
+                <small  *ngIf="email?.errors?.['required']">
+                    Write email...
+                </small>
+                <small  *ngIf="email?.errors?.['email']"> 
+                    Your email doesn't look quite right...
+                </small>
+                <small  *ngIf="email?.errors?.['pattern']"> 
+                    You can't use }]@#$...
+                </small>
+            </div>
+        </div>
+
+        <div class="mb-3"
+        [ngClass]="{invalid: password?.touched && password?.invalid}" >
+            <label class="form-label fw-bold" for="password">password:</label>
+            <input class="form-control" id="password" type="password" formControlName="password" required>
+            <div class="form-text" *ngIf="password?.invalid && password?.touched" required>
+                <small  *ngIf="password?.errors?.['required']"> 
+                    Write password...
+                </small>
+                <small *ngIf="password?.errors?.['minlength'] && password?.errors?.['maxlength'] ">
+                    Password must be between 6 and 24 chars 
+                </small>
+            </div>
+        </div>
+
+        <div *ngIf="signupForm.valid">Form looks good!</div>
+
+        <button
+            class="btn btn-block btn-primary"
+            type="submit"
+            [disabled]="!signupForm.valid"
+        >Submit</button>
+    </form>
+</div>
+
