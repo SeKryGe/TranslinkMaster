@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ToDoService } from '../../services/todo.service';
 import { Todo } from '../../interfaces';
 import { ToastrService } from 'ngx-toastr';
@@ -11,6 +11,7 @@ import { ToastrService } from 'ngx-toastr';
 export class TodoComponent implements OnInit {
   
   @Input() todo!: Todo
+  @Output() onDataChange = new EventEmitter<void>();
   todoList: Todo[];
 
   constructor(
@@ -34,7 +35,7 @@ export class TodoComponent implements OnInit {
   }
 
   deleteTodo(id: string) {
-    this.todoService.deleteTodo(id).subscribe();
+    this.todoService.deleteTodo(id).subscribe(() => this.reloadData());
     this.toasterService.error(`Todo ${this.todo.title} Deleted!`, 'Deleted Successfuly');
   }
 
@@ -51,7 +52,9 @@ export class TodoComponent implements OnInit {
       });
 
     this.todo.isCompleted ? this.toasterService.success(`Todo succesfully completed`, 'completed') : '';
+  }
 
-    
+  reloadData() {
+    this.onDataChange.emit();
   }
 }

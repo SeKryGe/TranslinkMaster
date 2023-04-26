@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { ToDoService } from '../shared/services/todo.service';
 import { Todo } from '../shared/interfaces';
 
@@ -11,6 +11,7 @@ import { Todo } from '../shared/interfaces';
 export class TodoFormComponent {
   todoList!: Todo
   title = ''
+  @Output() onDataChange = new EventEmitter<void>();
 
   constructor(public todoService: ToDoService) { }
 
@@ -20,10 +21,16 @@ export class TodoFormComponent {
         "title": this.title,
         isCompleted: false,
         updatedAt: new Date()
-      }).subscribe(res => res);
+      }).subscribe(res => {
+        res;
+        this.reloadData()
+      });
     } 
     this.title = ''
   }
 
+  reloadData() {
+    this.onDataChange.emit();
+  }
 
 }

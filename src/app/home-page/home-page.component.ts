@@ -16,7 +16,12 @@ export class HomePageComponent implements OnInit  {
  constructor (public todoService: ToDoService) {}
 
   ngOnInit(): void {
+    this.reloadData()    
+  }
+
+  reloadData() {
     this.todoList = this.todoService.getTodos();
   }
+
 
  }
