@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { ToDoService } from '../shared/services/todo.service';
+import { Todo } from '../shared/interfaces';
 
 
 @Component({
@@ -8,16 +9,21 @@ import { ToDoService } from '../shared/services/todo.service';
   styleUrls: ['./todo-form.component.css']
 })
 export class TodoFormComponent {
-  todo = '';
+  todoList!: Todo
+  title = ''
 
   constructor(public todoService: ToDoService) { }
-  
-  
 
-  onSubmit(){
-    if(this.todo != '') {
-      this.todoService.addTodo(this.todo);
-    }
-    this.todo = '';
+  onSubmit() {
+    if(this.title != '') {
+      this.todoService.addTodo({
+        "title": this.title,
+        isCompleted: false,
+        updatedAt: new Date()
+      }).subscribe(res => res);
+    } 
+    this.title = ''
   }
+
+
 }

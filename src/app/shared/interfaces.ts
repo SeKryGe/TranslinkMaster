@@ -1,12 +1,13 @@
+
 export interface Todo {
-    id: number;
+    _id?: string;
     title: string;
     isCompleted: boolean;
-    date: Date;
+    updatedAt: Date
   }
 
 export interface User {
-    id:number;
+    id:string;
     firstname:string;
     lastName:string;
     list: Todo

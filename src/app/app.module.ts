@@ -14,6 +14,7 @@ import { LoginPageComponent } from './registration/login-page/login-page.compone
 import { TodoComponent } from './shared/components/todo/todo.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TodoFormComponent } from './todo-form/todo-form.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { TodoFormComponent } from './todo-form/todo-form.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
+    HttpClientModule,
     ReactiveFormsModule,
     NgbModule,
     FormsModule,

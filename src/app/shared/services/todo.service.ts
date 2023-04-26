@@ -1,50 +1,36 @@
 import { Injectable } from '@angular/core';
 import { Todo } from '../interfaces';
+import { HttpClient } from '@angular/common/http';
+import { map } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ToDoService {
 
-  todoList: Todo[] = [
-    {
-      id: 1,
-      title: 'Todo One',
-      isCompleted: false,
-      date: new Date('4-15-2023')
-    },
-    {
-      id: 2,
-      title: 'Todo Two',
-      isCompleted: false,
-      date: new Date('5-15-2023')
-    },
-    {
-      id: 3,
-      title: 'Todo Three',
-      isCompleted: false,
-      date: new Date('6-15-2023')
-    }
-  ];
+  host = 'http://localhost:3000/api/todos';
+  
+  constructor(private http: HttpClient) {}
 
-  constructor() { }
-
-  deleteTodo(item: Todo) {
-    let index = this.todoList.indexOf(item);
-    this.todoList.splice(index, 1);
-
-    // this.deletePopup.success(`Todo ${item.id} Deleted!`);
+  getTodos(): Observable<Todo[]> {
+    return this.http.get<Todo[]>(`${this.host}`).pipe(map((res) => res));
+  }
+  
+  addTodo(todo: Todo): Observable<Todo> {
+    return this.http.post<Todo>(`${this.host}`, { 
+      "title": todo.title,
+      "isCompleted": false
+    });
+  }
+  
+  deleteTodo(id: string): Observable<Todo> {
+    return this.http.delete<Todo>(`${this.host}/${id}`);
   }
 
-  addTodo(title: any) {
-    let id = this.todoList.length + 2;
-
-    const item: Todo = {
-      id: id,
-      isCompleted: false,
-      date: new Date(),
-      title: title
-    }
-    this.todoList.unshift(item);
+  updateTodo(id: string, todo: Todo) : Observable<Todo> {
+    return this.http.put<Todo>(`${this.host}/${id}`, {
+      "isCompleted": todo.isCompleted
+    })
   }
 }

@@ -11,38 +11,47 @@ import { ToastrService } from 'ngx-toastr';
 export class TodoComponent implements OnInit {
   
   @Input() todo!: Todo
+  todoList: Todo[];
 
-  todoList?: Todo[]
-  completed: boolean = false;
-
-  constructor(public todoService: ToDoService,
-     private toasterService: ToastrService) { 
-      this.todoList = todoService.todoList
-     }
-
-  ngOnInit(): void {
+  constructor(
+    private toasterService: ToastrService,
+    private todoService: ToDoService,
+  ) {
+    this.todoList = [];
   }
-
-  onChange() {
-    console.log("changed");
-    this.completed = !this.completed;
-    this.completed ? this.toasterService.success(`Todo succesfully completed`, 'completed') : '';
-  }
-
-  onCliCk() {
-    console.log("Clicked");
+  
+  ngOnInit() {
+    this.todoService.getTodos().subscribe((data) => {
+      this.todoList = data as Todo[];
+    });
   }
 
   toggleClass() {
-    if (this.completed) {
-      return { 'list-group-item-success': this.completed, 'border-primary': this.completed };
+    if (this.todo.isCompleted) {
+      return { 'list-group-item-success': this.todo.isCompleted, 'border-primary': this.todo.isCompleted };
     } 
     return
   }
 
-  deleteTodo(item:any) {
-    this.todo = item;
-    this.todoService.deleteTodo(item);
-    this.toasterService.error(`Todo ${item.id} Deleted!`, 'Deleted Successfuly');
+  deleteTodo(id: string) {
+    this.todoService.deleteTodo(id).subscribe();
+    this.toasterService.error(`Todo ${this.todo.title} Deleted!`, 'Deleted Successfuly');
+  }
+
+  updateTodo(id: string) {
+    this.todo.isCompleted = !this.todo.isCompleted;
+
+    this.todoService.updateTodo(id,{
+      "isCompleted": this.todo.isCompleted,
+      title: this.todo.title,
+      updatedAt: new Date()
+    })
+      .subscribe((updatedTodo) => {
+        this.todo = updatedTodo;
+      });
+
+    this.todo.isCompleted ? this.toasterService.success(`Todo succesfully completed`, 'completed') : '';
+
+    
   }
 }
