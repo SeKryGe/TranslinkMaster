@@ -4,12 +4,12 @@ import { MainLayotComponent } from './shared/components/main-layot/main-layot.co
 import { HomePageComponent } from './home-page/home-page.component';
 import { LoginPageComponent } from './registration/login-page/login-page.component';
 import { SignUpPageComponent } from './registration/sign-up-page/sign-up-page.component';
-import { TodoFormComponent } from './todo-form/todo-form.component';
+import { AuthGuard } from './shared/services/auth.guard';
 
 const routes: Routes = [
   { path: '', component: MainLayotComponent, children:[
     {path: '', redirectTo: '/', pathMatch: 'full'},
-    {path: '', component: HomePageComponent},
+    {path: '', component: HomePageComponent, canActivate: [AuthGuard]},
     {path: 'login', component: LoginPageComponent},
     {path: 'signUp', component: SignUpPageComponent},
   ]

@@ -9,12 +9,12 @@ import { Observable } from 'rxjs';
 })
 export class ToDoService {
 
-  host = 'http://localhost:3000/api/todos';
+  host = 'http://localhost:3000/todos';
   
   constructor(private http: HttpClient) {}
 
   getTodos(): Observable<Todo[]> {
-    return this.http.get<Todo[]>(`${this.host}`).pipe(map((res) => res));
+    return this.http.get<Todo[]>(`${this.host}`)
   }
   
   addTodo(todo: Todo): Observable<Todo> {

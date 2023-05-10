@@ -1,5 +1,5 @@
 <div class="card m-auto p-auto" style="width: 60%;">
-    <form class="card-body" [formGroup]="signupForm" *ngIf="!(auth.user | async)?.id" (ngSubmit)="signUp()">
+    <form class="card-body" [formGroup]="signupForm" *ngIf="!(auth.user | async)?._id" (ngSubmit)="signUp()">
         
         <div class="mb-3" 
         [ngClass]="{invalid: firstName?.touched && firstName?.invalid}">
@@ -35,7 +35,7 @@
                     Your email doesn't look quite right...
                 </small>
                 <small  *ngIf="email?.errors?.['pattern']"> 
-                    You can't use }]@#$...
+                    You can't use }]#$...
                 </small>
             </div>
         </div>

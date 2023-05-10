@@ -7,8 +7,10 @@ export interface Todo {
   }
 
 export interface User {
-    id:string;
-    firstname:string;
+    _id?:string;
+    email:string;
+    password:string;
+    firstName:string;
     lastName:string;
-    list: Todo
+    todo?: Todo
 }

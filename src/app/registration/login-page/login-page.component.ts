@@ -37,8 +37,11 @@ export class LoginPageComponent {
 
 
   loginIn() {
-      this.auth.loginIn(this.email?.value, this.password?.value)
-      // this.auth.loginIn(this.email?.value, this.password?.value).then( () => {this.router.navigate(['/user'])})
+      this.auth.loginIn(this.email?.value, this.password?.value).subscribe( res => {
+        res
+        this.router.navigate(['/'])
+        })
+
       this.loginInForm.reset()
     }
 
