@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { User } from '../interfaces';
 import { Observable, map } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
+import { ToastrService } from 'ngx-toastr';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,9 @@ export class AuthService {
 
   host = 'http://localhost:3000/auth';
 
-  constructor(private http: HttpClient) { }
+  constructor(
+    private http: HttpClient,
+    private toast: ToastrService) { }
 
   
   loginIn(email: string, password: string) {
@@ -23,6 +26,7 @@ export class AuthService {
       map((token) => {
         console.log(token)
         localStorage.setItem("token", token.token)
+        this.toast.success('Success','You are logged In')
         return token
       })
       )
@@ -42,6 +46,7 @@ export class AuthService {
       map( token => {
         console.log(token)
         localStorage.setItem("token", token.token)
+        this.toast.success('Success', 'You are create the User')
         return token
       })
       )
@@ -49,6 +54,7 @@ export class AuthService {
 
   logOut() {
     localStorage.removeItem('token')
+    this.toast.success('Success', 'You are log Out')
   }
 
   updateUser(user: string, data: { firstName: string; lastName: string; }) {
