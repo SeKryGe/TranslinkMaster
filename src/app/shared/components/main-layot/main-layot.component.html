@@ -4,13 +4,18 @@
         <h1>ToDo List</h1>
       </a>
       <div>
-        <ul class="navbar-nav">
-            <li><a class="nav-item nav-link" routerLink="/signUp" routerLinkActive>Sign Up</a></li>
-            <li><a class="nav-item nav-link" routerLink="/login" routerLinkActive>Login</a></li>
-          </ul>
+        <ul class="navbar-nav" *ngIf="!auth.loggedIn()">
+          <li><a class="nav-item nav-link" routerLink="/signUp" routerLinkActive>Sign Up</a></li>
+          <li><a class="nav-item nav-link" routerLink="/login" routerLinkActive>Login</a></li>
+        </ul>
+        <ul class="navbar-nav" *ngIf="auth.loggedIn()">
+          <li><a class="nav-item nav-link" (click)="logOut()" >Log Out</a></li>
+        </ul>
       </div>
     </div>
 </nav>
+
+
 <div class="container">
     <router-outlet></router-outlet>
 </div>
