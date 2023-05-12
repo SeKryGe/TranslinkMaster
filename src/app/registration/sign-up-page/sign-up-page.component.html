@@ -10,10 +10,10 @@
                     Write First Name...
                 </small>
             </div>
-            </div>
+        </div>
 
-            <div class="mb-3"
-            [ngClass]="{invalid: lastName?.touched && lastName?.invalid}">
+        <div class="mb-3"
+        [ngClass]="{invalid: lastName?.touched && lastName?.invalid}">
             <label class="form-label fw-bold" for="lastName">Last name:</label>
             <input class="form-control" id="lastName" type="lastName" formControlName="lastName" required>
             <div class="form-text" *ngIf="lastName?.invalid && lastName?.touched">
@@ -42,17 +42,17 @@
 
         <div class="mb-3"
         [ngClass]="{invalid: password?.touched && password?.invalid}" >
-            <label class="form-label fw-bold" for="password">password:</label>
-            <input class="form-control" id="password" type="password" formControlName="password" required>
-            <div class="form-text" *ngIf="password?.invalid && password?.touched" required>
-                <small  *ngIf="password?.errors?.['required']"> 
-                    Write password...
-                </small>
-                <small *ngIf="password?.errors?.['minlength'] && password?.errors?.['maxlength'] ">
-                    Password must be between 6 and 24 chars 
-                </small>
-            </div>
-        </div>
+          <label class="form-label fw-bold" for="password">password:</label>
+          <input class="form-control" id="password" type="password" formControlName="password" required>
+          <div class="form-text" *ngIf="password?.invalid && password?.touched">
+            <small *ngIf="password?.errors?.['required']">
+                Write password...
+            </small>
+            <small *ngIf="password?.errors?.['minlength'] || password?.errors?.['maxlength'] ">
+                Password must be between 6 and 24 chars
+            </small>
+          </div>
+      </div>
 
         <div *ngIf="signupForm.valid">Form looks good!</div>
 
