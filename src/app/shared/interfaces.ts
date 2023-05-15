@@ -4,6 +4,7 @@ export interface Todo {
     title: string;
     isCompleted: boolean;
     updatedAt: Date
+    user?: User
   }
 
 export interface User {
@@ -12,5 +13,4 @@ export interface User {
     password:string;
     firstName:string;
     lastName:string;
-    todo?: Todo
 }

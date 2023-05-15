@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { User } from '../interfaces';
-import { Observable, map } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
+import { Observable, catchError, map, throwError } from 'rxjs';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { ToastrService } from 'ngx-toastr';
 
 @Injectable({
@@ -28,8 +28,14 @@ export class AuthService {
         localStorage.setItem("token", token.token)
         this.toast.success('Success','You are logged In')
         return token
-      })
-      )
+      }),
+      catchError((error: HttpErrorResponse) => {
+        this.toast.error(error.error.message, 'Error', {
+          closeButton: true,
+          timeOut: 5000
+        });
+        return throwError(error);
+      }))
   }
 
   loggedIn() {
@@ -42,15 +48,22 @@ export class AuthService {
       "password":user.password,
       "firstName":user.firstName,
       "lastName":user.lastName
-    }).pipe(
+    })
+    .pipe(
       map( token => {
         console.log(token)
         localStorage.setItem("token", token.token)
         this.toast.success('Success', 'You are create the User')
         return token
-      })
-      )
-  }
+      }),
+      catchError((error: HttpErrorResponse) => {
+        this.toast.error(error.error.message, 'Error', {
+          closeButton: true,
+          timeOut: 5000
+        });
+        return throwError(error);
+      })      
+  )}
 
   logOut() {
     localStorage.removeItem('token')
@@ -60,4 +73,6 @@ export class AuthService {
   updateUser(user: string, data: { firstName: string; lastName: string; }) {
     throw new Error('Method not implemented.');
   }
+  
 }
+

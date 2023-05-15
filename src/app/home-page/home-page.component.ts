@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ToDoService } from '../shared/services/todo.service';
 import { Todo } from '../shared/interfaces';
-import { Observable } from 'rxjs';
+import { Observable, map } from 'rxjs';
 
 
 

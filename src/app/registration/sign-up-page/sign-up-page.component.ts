@@ -29,9 +29,9 @@ export class SignUpPageComponent {
       ]
     ],
       'password': [null, [
+        Validators.required,
         Validators.minLength(6),
-        Validators.maxLength(25),
-        Validators.required
+        Validators.maxLength(25)
       ]
     ],
       'firstName': [null,[

@@ -22,7 +22,13 @@
        <label class="form-label fw-bold" for="password">password:</label>
        <input class="form-control" id="password" type="password" formControlName="password" required>
        <div class="form-text" *ngIf="password?.invalid && password?.touched" >
-         <small >Password must be between 6 and 24 chars</small>
+        <small  *ngIf="password?.errors?.['required']"> 
+          Write password...
+        </small>
+        <small *ngIf="password?.errors?.['minlength'] || password?.errors?.['maxlength'] ">
+          Password must be between 6 and 24 chars
+        </small>
+
        </div>
    
        <div class="form-text" *ngIf="loginInForm.valid">Form looks good! Let's do this.</div>
