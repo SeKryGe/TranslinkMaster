@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { AuthService } from '../../services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-main-layot',
@@ -8,7 +10,13 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 })
 export class MainLayotComponent {
 
-  constructor() {
+  constructor(public auth: AuthService,
+    private route: Router) {
   } 
+
+  logOut (){
+    this.auth.logOut()
+    this.route.navigate(['/login'])
+  }
 
 }

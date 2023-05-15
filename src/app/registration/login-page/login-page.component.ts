@@ -1,6 +1,8 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { AuthService } from 'src/app/shared/services/auth.service';
 
 @Component({
@@ -15,7 +17,8 @@ export class LoginPageComponent {
   constructor(
     public fb: FormBuilder,
     private router: Router,
-    public auth: AuthService
+    public auth: AuthService,
+    private toastr: ToastrService
   ) {}
 
   ngOnInit(){
@@ -37,8 +40,12 @@ export class LoginPageComponent {
 
 
   loginIn() {
-      this.auth.loginIn(this.email?.value, this.password?.value)
-      // this.auth.loginIn(this.email?.value, this.password?.value).then( () => {this.router.navigate(['/user'])})
+      this.auth.loginIn(this.email?.value, this.password?.value).subscribe( res => {
+        res
+        this.router.navigate(['/'])
+        }
+      )
+
       this.loginInForm.reset()
     }
 

@@ -4,11 +4,13 @@ export interface Todo {
     title: string;
     isCompleted: boolean;
     updatedAt: Date
+    user?: User
   }
 
 export interface User {
-    id:string;
-    firstname:string;
+    _id?:string;
+    email:string;
+    password:string;
+    firstName:string;
     lastName:string;
-    list: Todo
 }

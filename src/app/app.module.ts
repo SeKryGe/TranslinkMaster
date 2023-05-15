@@ -15,6 +15,8 @@ import { TodoComponent } from './shared/components/todo/todo.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TodoFormComponent } from './todo-form/todo-form.component';
 import { HttpClientModule } from '@angular/common/http';
+import { AuthGuard } from './shared/services/auth.guard';
+import { AuthService } from './shared/services/auth.service';
 
 @NgModule({
   declarations: [
@@ -37,7 +39,7 @@ import { HttpClientModule } from '@angular/common/http';
     BrowserAnimationsModule,
     ToastrModule.forRoot()    
   ],
-  providers: [],
+  providers: [AuthService, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

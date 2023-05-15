@@ -11,14 +11,13 @@ import { AuthService } from 'src/app/shared/services/auth.service';
 })
 export class SignUpPageComponent {
 
-
   user!: User
   signupForm!: FormGroup
 
   constructor(
     public auth: AuthService,
-    public fb: FormBuilder,
-    private router: Router
+    private router: Router,
+    public fb: FormBuilder
     ) { }
 
   ngOnInit() {
@@ -30,9 +29,9 @@ export class SignUpPageComponent {
       ]
     ],
       'password': [null, [
+        Validators.required,
         Validators.minLength(6),
-        Validators.maxLength(25),
-        Validators.required
+        Validators.maxLength(25)
       ]
     ],
       'firstName': [null,[
@@ -53,7 +52,16 @@ export class SignUpPageComponent {
   get lastName() {return this.signupForm.get('lastName')}
 
   signUp() {
-    throw new Error('Method not implemented.');
+    this.auth.signUp({
+      "email": this.email?.value,
+      "password": this.password?.value,
+      "firstName": this.firstName?.value,
+      "lastName": this.lastName?.value
+    }).subscribe(res => {
+      res
+      this.router.navigate(['/'])})
+    
+    this.signupForm.reset()
   }
 
   setNames(user:any) {
