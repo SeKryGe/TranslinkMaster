@@ -4,14 +4,15 @@
     </div>
 
     <div class="card-body">
-        <app-todo-form></app-todo-form>
+        <app-todo-form (onDataChange)="reloadData()"></app-todo-form>
     </div>
     
     <div class="card-body" >
         <app-todo 
         class="card-title" 
         *ngFor="let todo of todoList|async" 
-        [todo]="todo">
+        [todo]="todo"
+        (onDataChange)="reloadData()">
         </app-todo>
     </div>   
 

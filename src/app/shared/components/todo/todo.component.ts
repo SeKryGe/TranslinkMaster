@@ -36,6 +36,7 @@ export class TodoComponent implements OnInit {
 
   deleteTodo(id: string) {
     this.todoService.deleteTodo(id).subscribe(() => this.reloadData());
+
     this.toasterService.success(`Todo ${this.todo.title} Deleted!`, 'Deleted Successfuly');
   }
 
@@ -51,7 +52,9 @@ export class TodoComponent implements OnInit {
         this.todo = updatedTodo;
       });
 
+
     this.todo.isCompleted ? this.toasterService.success(`${this.todo.title} succesfully completed`, 'completed') : '';
+
   }
 
   reloadData() {
