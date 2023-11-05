@@ -9,6 +9,7 @@
           <li><a class="nav-item nav-link" routerLink="/login" routerLinkActive>Login</a></li>
         </ul>
         <ul class="navbar-nav" *ngIf="auth.loggedIn()">
+          <h2>{{(this.auth.user | async)?.email }}</h2>
           <li><a class="nav-item nav-link" (click)="logOut()" >Log Out</a></li>
         </ul>
       </div>

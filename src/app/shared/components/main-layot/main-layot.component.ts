@@ -11,8 +11,7 @@ import { Router } from '@angular/router';
 export class MainLayotComponent {
 
   constructor(public auth: AuthService,
-    private route: Router) {
-  } 
+    private route: Router) {} 
 
   logOut (){
     this.auth.logOut()

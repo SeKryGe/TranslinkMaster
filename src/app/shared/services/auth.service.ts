@@ -73,6 +73,9 @@ export class AuthService {
   updateUser(user: string, data: { firstName: string; lastName: string; }) {
     throw new Error('Method not implemented.');
   }
-  
+
+  getUserName(userId:any ): Observable<string> {
+    return this.http.get<string>(`/api/users/${userId}/name`);
+  }
 }
 
